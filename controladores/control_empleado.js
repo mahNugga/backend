@@ -20,7 +20,12 @@ var control_empleado = {
         //var empleado = new Empleado();
 
         var params = req.body;
-        
+        console.log(params.rol);
+        var rol = params.rol;
+        var roldb;
+        if(rol=="empleado1"){ roldb=1}
+        if(rol=="administrador"){roldb=7}
+        console.log(rol);
         try {
             var empleado = await Empleado.query().insert({
                 nombre: params.nombre,
@@ -29,9 +34,9 @@ var control_empleado = {
                 password: params.password,
                 telefono: params.telefono,
                 direccion: params.direccion,
-                rol: params.rol,
+                rol: roldb,
                 fecha_creacion: params.fecha_creacion,
-                estado: params.estado            
+                estado: 1           
             });
             if(!empleado){
                 return res.status(500).send({
@@ -54,11 +59,29 @@ var control_empleado = {
                 'empleado.nombre',
                 'empleado.apellido',
                 'empleado.correo'
-            );
+            ).where('empleado.apellido',params.apellido);
             if(!buscaEmpleado) return res.status(404).send({message:"Empleado no existe"});
             return res.status(200).send({
                 buscaEmpleado:buscaEmpleado,
                 message: "metodo seleccionaEmpleado success!"
+            });
+        } catch (error) {
+            
+        }
+
+    },
+
+    listarEmpleados: async function(req,res){
+        try {
+            var listaEmpleado = await Empleado.query().select(
+                'empleado.nombre',
+                'empleado.apellido',
+                'empleado.correo'
+            );
+            if(!listaEmpleado) return res.status(404).send({message:"Empleado no existe"});
+            return res.status(200).send({
+                listaEmpleado:listaEmpleado,
+                message: "metodo listar Empleados  is a success!"
             });
         } catch (error) {
             
