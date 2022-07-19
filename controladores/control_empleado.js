@@ -20,7 +20,7 @@ var control_empleado = {
         //var empleado = new Empleado();
 
         var params = req.body;
-        console.log(params.rol);
+        //console.log(params.rol);
         var rol = params.rol;
         var roldb;
         if(rol=="empleado1"){ roldb=1}

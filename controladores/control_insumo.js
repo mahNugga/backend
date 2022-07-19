@@ -1,11 +1,10 @@
 'use strict'
 const { Knex } = require('knex');
+var Insumo = require('../models/insumo');
 
 var control_insumo = {
 
     nuevoInsumo: async function(req,res){
-        //var empleado = new Empleado();
-
         var params = req.body;
         console.log(params);
 
@@ -16,7 +15,7 @@ var control_insumo = {
                 costo:params.costo,
                 estado: 1,
                 stock: params.stock,
-                stock_ideal: params.stock_ideal,
+                stock_ideal: params.stock_ideal
                            
             });
             if(!insumo){
@@ -24,7 +23,7 @@ var control_insumo = {
                     message:"Error al insertar datos de insumo en la base de datos"});
             }
             return res.status(200).send({
-                empleado:empleado,
+                insumo:insumo,
                 message: "metodo nuevoInsumo success!"
             });
         } catch (error) {
@@ -51,7 +50,7 @@ var control_insumo = {
             
         }
 
-    },
+    }
 
 };
 

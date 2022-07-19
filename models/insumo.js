@@ -23,4 +23,4 @@ class Insumo extends Model{
         return 'stock_ideal';
     }
 };
-module.exports = insumo;
+module.exports = Insumo;
