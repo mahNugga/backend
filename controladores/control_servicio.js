@@ -12,6 +12,7 @@ var control_servicio = {
                 nombre: params.nombre,
                 descripcion: params.descripcion,
                 hora:params.hora,
+                precio:params.precio,
                 estado: 1
                            
             });
@@ -39,7 +40,7 @@ var control_servicio = {
             );
             if(!listaServicio) return res.status(404).send({message:"Servicio no existe"});
             return res.status(200).send({
-                listaEmpleado:listaEmpleado,
+                listaServicio:listaServicio,
                 message: "metodo listar Servicios is a success!"
             });
         } catch (error) {

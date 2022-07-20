@@ -37,13 +37,14 @@ var control_insumo = {
                 'insumo.id',
                 'insumo.nombre',
                 'insumo.descripcion',
+                'insumo.costo',
                 'insumo.stock',
                 'insumo.estado',
                 'insumo.stock_ideal'
             );
-            if(!listaEmpleado) return res.status(404).send({message:"Insumo no existe"});
+            if(!listaInsumo) return res.status(404).send({message:"Insumo no existe"});
             return res.status(200).send({
-                listaEmpleado:listaEmpleado,
+                listaInsumo:listaInsumo,
                 message: "metodo listar Insumos is a success!"
             });
         } catch (error) {
