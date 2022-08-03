@@ -76,7 +76,9 @@ var control_empleado = {
             var listaEmpleado = await Empleado.query().select(
                 'empleado.nombre',
                 'empleado.apellido',
-                'empleado.correo'
+                'empleado.correo',
+                'empleado.telefono',
+                'empleado.rol'
             );
             if(!listaEmpleado) return res.status(404).send({message:"Empleado no existe"});
             return res.status(200).send({
