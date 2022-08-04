@@ -91,8 +91,34 @@ var control_empleado = {
 
     },
 
-    actualizaEmpleado: function(req,res){
+    actualizaEmpleado: async function(req,res){
+        var params = req.body;
+        var rol  = params.rol;
+        var roldb;
+        if(rol=='empleado'){roldb=1}
+        if(rol=='administrador'){roldb=7}
+        try{
+            var editado = await Empleado.query().patch({
+                nombre: params.nombre,
+                apellido: params.apellido,
+                correo:params.correo,
+                password: params.password,
+                telefono: params.telefono,
+                direccion: params.direccion,
+                rol: roldb
+            });
+            if(!editado){
+                return res.status(500).send({
+                    message:"Error al actualizar empleado"
+                });
+            }
+            return res.status(200).send({
+                editado:editado,
+                message:"Empleado Editado success!"
+            });
+        }catch(error){
 
+        }
     },
 
     borrarEmpleado: function(req,res){
