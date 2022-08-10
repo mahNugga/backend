@@ -47,7 +47,7 @@ var control_empleado = {
                 message: "metodo nuevoEmpleado success!"
             });
         } catch (error) {
-            
+            console.log(error);
         }        
     },
 
@@ -74,19 +74,20 @@ var control_empleado = {
     listarEmpleados: async function(req,res){
         try {
             var listaEmpleado = await Empleado.query().select(
+                'empleado.id',
                 'empleado.nombre',
                 'empleado.apellido',
                 'empleado.correo',
                 'empleado.telefono',
                 'empleado.rol'
-            );
+            ).where('empleado.estado','1');
             if(!listaEmpleado) return res.status(404).send({message:"Empleado no existe"});
             return res.status(200).send({
                 listaEmpleado:listaEmpleado,
                 message: "metodo listar Empleados  is a success!"
             });
         } catch (error) {
-            
+            console.log(error);
         }
 
     },
@@ -97,8 +98,11 @@ var control_empleado = {
         var roldb;
         if(rol=='empleado'){roldb=1}
         if(rol=='administrador'){roldb=7}
+        //console.log(params.id);
+        //console.log(params);
+        //console.log(roldb);
         try{
-            var editado = await Empleado.query().patch({
+            var editado = await Empleado.query().findById(params.id).patch({
                 nombre: params.nombre,
                 apellido: params.apellido,
                 correo:params.correo,
@@ -117,12 +121,33 @@ var control_empleado = {
                 message:"Empleado Editado success!"
             });
         }catch(error){
-
+            console.log(error);
         }
     },
 
     borrarEmpleado: function(req,res){
+        
+    },
 
+    softBorradoEmpleado: async function(req,res){
+        var params = req.body;
+        try{
+            var softBorrar = await Empleado.query().findById(params.id)
+            .patch({
+                estado:0
+            });
+            if(!softBorrar){
+                return res.status(500).send({
+                    message:" Error al softEliminar empleado!"
+                });
+            }
+            return res.status(200).send({
+                softBorrar:softBorrar,
+                message:"SoftBorradoEmpleado success!"
+            });
+        }catch(error){
+
+        }
     },
 
     subirImagen: async function(req,res){
