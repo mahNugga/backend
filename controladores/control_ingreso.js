@@ -58,7 +58,7 @@ var control_ingreso = {
                     {
                         usuario_c:usuario_c,
                         teller:5,
-                        message:"Es un usuario salvaje!"
+                        message:"Es un usuario!"
                     }
                 );
             }

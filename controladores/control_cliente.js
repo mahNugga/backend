@@ -52,6 +52,27 @@ var control_cliente = {
             
         }
 
+    },
+
+    infoBasicaCabeceras: async function(req,res){
+        var params = req.query;
+        console.log(req.query);
+        try{
+            var clienteBasic = await Cliente.query().findById(params.id)
+            .select(
+                'cliente.nombre',
+                'cliente.apellido'
+            );
+            if(!clienteBasic) return res.status(404).send(
+                {messsage:"No se encontro al fulano!"}
+            );
+            return res.status(200).send({
+                clienteBasic:clienteBasic,
+                message:"Metodo basico para cab Cliente success!"
+            });
+        }catch(error){
+            console.log(error);
+        }
     }
 
 

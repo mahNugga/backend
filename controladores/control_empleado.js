@@ -92,6 +92,28 @@ var control_empleado = {
 
     },
 
+    listaSinAdmin: async function(req,res){
+        try{
+            var listaSinrangos7 = await Empleado.query().select(
+                'empleado.id',
+                'empleado.nombre',
+                'empleado.apellido',
+                'empleado.correo',
+                'empleado.telefono',
+                'empleado.rol'
+            ).where('empleado.estado','1').where('empleado.rol','1');
+            if(!listaSinrangos7) return res.status(404).send({
+                message:"Lista no fue creada"
+            });
+            return res.status(200).send({
+                listaSinrangos7:listaSinrangos7,
+                message:"Ahi va tu lista sin Admins"
+            });
+        }catch(error){
+            console.log(error);
+        }
+    },
+
     actualizaEmpleado: async function(req,res){
         var params = req.body;
         var rol  = params.rol;

@@ -6,7 +6,7 @@ var control_insumo = {
 
     nuevoInsumo: async function(req,res){
         var params = req.body;
-        console.log(params);
+        //console.log(params);
         try {
             var insumo = await Insumo.query().insert({
                 nombre: params.nombre,
