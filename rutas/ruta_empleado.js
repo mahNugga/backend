@@ -30,6 +30,7 @@ ruta.post('/nuevo-servicio',controlador_servicio.nuevoServicio);
 ruta.get('/consulta-servicio',controlador_servicio.listarServicios);
 ruta.post('/nuevo-horario',control_horario.nuevoHorario);
 ruta.get('/cliente-basicinfo',controlador_cliente.infoBasicaCabeceras);
+ruta.get('/verifica-fechas',control_horario.devolverFechas);
 
 ruta.post('/nuevo-cliente',controlador_cliente.nuevoCliente);
 ruta.get('/consulta-cliente',controlador_cliente.listarClientes);
