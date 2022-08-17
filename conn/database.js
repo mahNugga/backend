@@ -9,7 +9,9 @@ const knex= Knex({
         host:'localhost',
         user:'administrador', //usando el usuario creado en queries plantilla
         password:'whatsupdanger', //hashear esto
-        database:'estudiocarolinatesis' //base de datos en phpmyadmin EstudioCarolinaTesis
+        database:'estudiocarolinatesis', //base de datos en phpmyadmin EstudioCarolinaTesis
+        timezone:'UTC',
+        dateStrings:true
     },
 });
 

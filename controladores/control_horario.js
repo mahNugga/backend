@@ -43,13 +43,21 @@ var control_horario ={
                 'horario.hora_inicio',
                 'horario.hora_fin',
                 'horario.empleado_id'
-            ).where('horario.rango_inicio','>=',params.fechaing)
-            .where('horario.rango_fin','<=',params.fechaing);
+            ).where('horario.rango_inicio',params.fechaing)
+            //.where('horario.rango_fin','<=',params.fechaing); 
+
+            /* var fechin = await Horario.query().select(
+                'horario.rango_inicio',
+                'horario.rango_fin',
+                'horario.hora_inicio',
+                'horario.hora_fin',
+                'horario.empleado_id'
+            ).whereRaw(''); */
             var fechon = await Horario.query().select(
                 'horario.rango_inicio',
                 'horario.rango_fin',
                 'horario.fecha'
-            );
+            ); 
             if(!fechin){
                 return res.status(404).send({
                     message:"algo salio muy mal guacho"

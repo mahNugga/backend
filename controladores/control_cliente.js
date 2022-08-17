@@ -6,6 +6,7 @@ var control_cliente = {
 
     nuevoCliente: async function(req,res){
         var params = req.body;
+        console.log(params);
         try {
             var cliente = await Cliente.query().insert({
                 nombre: params.nombre,
@@ -16,7 +17,7 @@ var control_cliente = {
                 active: 0,
                 especial:'',
                 estado:1,
-                password: params.pass
+                password: params.password
                            
             });
             if(!cliente){
