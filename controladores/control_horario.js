@@ -1,5 +1,6 @@
 'use strict'
-//const { Knex } = require('Knex');
+/* const { default: knex } = require('knex'); */
+const { Knex } = require('Knex');
 var Horario = require('../models/horario');
 
 var control_horario ={
@@ -37,22 +38,25 @@ var control_horario ={
         var params = req.query;
         console.log(params);
         try{
-            var fechin = await Horario.query().select(
-                'horario.rango_inicio',
-                'horario.rango_fin',
-                'horario.hora_inicio',
-                'horario.hora_fin',
-                'horario.empleado_id'
-            ).where('horario.rango_inicio',params.fechaing)
-            //.where('horario.rango_fin','<=',params.fechaing); 
-
             /* var fechin = await Horario.query().select(
                 'horario.rango_inicio',
                 'horario.rango_fin',
                 'horario.hora_inicio',
                 'horario.hora_fin',
                 'horario.empleado_id'
-            ).whereRaw(''); */
+            ).where('horario.rango_inicio',params.fechaing) */
+            //.where('horario.rango_fin','<=',params.fechaing); 
+
+             var fechin = await Horario.query().select(
+                'horario.rango_inicio',
+                'horario.rango_fin',
+                'horario.hora_inicio',
+                'horario.hora_fin',
+                'horario.empleado_id'
+            ).whereRaw('? between horario.rango_inicio AND horario.rango_fin',[params.fechaing]);
+            /* .then(data=>{
+                console.log("buena bro!")
+            });  */
             var fechon = await Horario.query().select(
                 'horario.rango_inicio',
                 'horario.rango_fin',
