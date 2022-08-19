@@ -8,6 +8,7 @@ var controlador_especialidad = require('../controladores/control_especialidad');
 var controlador_servicio = require('../controladores/control_servicio');
 var controlador_ingreso = require('../controladores/control_ingreso');
 var control_horario = require('../controladores/control_horario');
+var la_reserva = require('../controladores/control_reservacion');
 
 var ruta = express.Router();
 
@@ -38,4 +39,6 @@ ruta.get('/consulta-cliente',controlador_cliente.listarClientes);
 ruta.get('/ingreso',controlador_ingreso.login);
 
 ruta.post('/imagen',controlador_empleado.subirImagen2);
+
+ruta.post('/reservar',la_reserva.nuevaReservacion);
 module.exports = ruta;
