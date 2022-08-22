@@ -41,4 +41,5 @@ ruta.get('/ingreso',controlador_ingreso.login);
 ruta.post('/imagen',controlador_empleado.subirImagen2);
 
 ruta.post('/reservar',la_reserva.nuevaReservacion);
+ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
 module.exports = ruta;
