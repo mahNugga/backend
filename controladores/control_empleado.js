@@ -196,6 +196,27 @@ var control_empleado = {
 
     subirImagen2: async function(req,res){
         
+    },
+
+    credencialesCabEmpleado: async function(req,res){
+        var params = req.query;
+        try{
+            var empeladoCab = await Empleado.query().findById(params.id)
+            .select(
+                'empleado.id',
+                'empleado.nombre',
+                'empleado.apellido'
+            );
+            if(!empeladoCab) return res.status(404).send({
+                message:"Empleado no ta qui"
+            });
+            return res.status(200).send({
+                empeladoCab:empeladoCab,
+                message:"Metodo credenciales empleado cab success!"
+            });
+        }catch(error){
+            console.log("El end: "+error);
+        }
     }
 
 };

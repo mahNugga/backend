@@ -2,6 +2,7 @@
 const {Knex} = require('Knex');
 var Reservacion = require('../models/reservacion');
 var Servicio = require('../models/servicio');
+var Cliente = require('../models/cliente');
 
 var control_reserva = {
     nuevaReservacion: async function(req,res){
@@ -71,12 +72,15 @@ var control_reserva = {
             var reseTrabajo = await Reservacion.query().select(
                 'reservacion.fecha',
                 'reservacion.hora',
-                'reservacion.cliente_id'
-            ).innerJoin(Servicio.query().select(
-                'servicio.nombre',
-                'servicio.hora',
-                'servicio.id'
-            ),'reservacion.servicio_id','servicio.id')
+                'reservacion.cliente_id',
+                's.nombre as servicio',
+                's.id',
+                'c.nombre',
+                'c.apellido'
+            ).innerJoin('servicio as s'
+            ,'reservacion.servicio_id','s.id')
+            .innerJoin('cliente as c'
+            ,'reservacion.cliente_id','c.id')
             .where('reservacion.empleado_id',params.id);
             if(!reseTrabajo) return res.status(404).send(
                 {message:"No eciste ese regitro siuuu!"}
@@ -84,6 +88,34 @@ var control_reserva = {
             return res.status(200).send({
                 reseTrabajo:reseTrabajo,
                 message:"thumb up"
+            });
+        }catch(error){
+            console.log(error);
+        }
+    },
+    muestraOneEmpleadore: async function(req,res){
+        var params = req.query;
+        try{
+            var reseNex = await Reservacion.query().select(
+                'reservacion.fecha',
+                'reservacion.hora',
+                'reservacion.servicio_id',
+                'reservacion.cliente_id',
+                's.nombre as servicio',
+                's.id',
+                'c.nombre',
+                'c.apellido'
+            ).innerJoin('servicio as s'
+            ,'reservacion.servicio_id','s.id')
+            .innerJoin('cliente as c'
+            ,'reservacion.cliente_id','c.id')
+            .where('reservacion.empleado_id',params.id).limit(1);
+            if(!reseNex) return res.status(404).send({
+                message:"sin reservacion que mostar"
+            });
+            return res.status(200).send({
+                reseNex:reseNex,
+                message:"metodo muestra siguiente trabajo success!"
             });
         }catch(error){
             console.log(error);

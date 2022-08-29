@@ -30,6 +30,8 @@ ruta.get('/consulta-especialidad',controlador_especialidad.listarEspecialidades)
 ruta.post('/nuevo-servicio',controlador_servicio.nuevoServicio);
 ruta.get('/consulta-servicio',controlador_servicio.listarServicios);
 ruta.post('/nuevo-horario',control_horario.nuevoHorario);
+ruta.get('/consulta-horarioempleado',control_horario.consultaHorario);
+ruta.get('/empleado-info',controlador_empleado.credencialesCabEmpleado);
 ruta.get('/cliente-basicinfo',controlador_cliente.infoBasicaCabeceras);
 ruta.get('/verifica-fechas',control_horario.devolverFechas);
 
@@ -42,4 +44,6 @@ ruta.post('/imagen',controlador_empleado.subirImagen2);
 
 ruta.post('/reservar',la_reserva.nuevaReservacion);
 ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
+ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
+ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 module.exports = ruta;

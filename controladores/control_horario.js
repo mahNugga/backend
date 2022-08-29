@@ -75,6 +75,28 @@ var control_horario ={
         }catch(error){
             console.log("el mistake:"+error);
         }
+    },
+
+    consultaHorario: async function(req,res){
+        var params = req.query;
+        try{
+            var homer = await Horario.query().select(
+                'horario.nombre',
+                'horario.rango_inicio',
+                'horario.rango_fin',
+                'horario.hora_inicio',
+                'horario.hora_fin'
+            ).where('horario.empleado_id',params.id);
+            if(!homer) return res.status(404).send({
+                message:"no hay horarios"
+            });
+            return res.status(200).send({
+                homer:homer,
+                message:"thumbUp"
+            });
+        }catch(error){
+            console.log(error);
+        }
     }
 
 };
