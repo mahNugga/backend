@@ -51,7 +51,7 @@ var control_reserva = {
                 'reservacion.hora',
                 'reservacion.cliente_id',
                 'serv.nombre',
-                'serv.hora'
+                'serv.hora as ora'
             ).innerJoin('servicio as serv'
             ,'reservacion.servicio_id','serv.id')
             .where('reservacion.cliente_id',params.id);
