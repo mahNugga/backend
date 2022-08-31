@@ -22,7 +22,8 @@ var control_reserva = {
                 fecha_creado:params.fecha_creado,
                 servicio_id:params.servicio_id,
                 empleado_id:params.empleado_id,
-                cliente_id:params.cliente_id
+                cliente_id:params.cliente_id,
+                estado_id:1
             });
             if(!reserva){
                 return res.status(500).send({
@@ -73,6 +74,7 @@ var control_reserva = {
                 'reservacion.fecha',
                 'reservacion.hora',
                 'reservacion.cliente_id',
+                'reservacion.estado_id',
                 's.nombre as servicio',
                 's.id',
                 'c.nombre',
@@ -120,6 +122,36 @@ var control_reserva = {
         }catch(error){
             console.log(error);
         }
-    }
+    },
+
+    muestraAdminadore: async function(req,res){
+        var params = req.query;
+        try{
+            var reseDe = await Reservacion.query().select(
+                'reservacion.fecha',
+                'reservacion.hora',
+                'reservacion.cliente_id',
+                'reservacion.estado_id as estado',
+                's.nombre as servicio',
+                's.id',
+                'c.nombre',
+                'c.apellido',
+                'empleado.apellido as empleado'
+            ).innerJoin('servicio as s'
+            ,'reservacion.servicio_id','s.id')
+            .innerJoin('cliente as c'
+            ,'reservacion.cliente_id','c.id')
+            .innerJoin('empleado','reservacion.empleado_id','empleado.id');
+            if(!reseDe) return res.status(404).send(
+                {message:"No eciste ese regitro siuuu!"}
+            );
+            return res.status(200).send({
+                reseDe:reseDe,
+                message:"thumb up"
+            });
+        }catch(error){
+            console.log(error);
+        }
+    },
 };
 module.exports = control_reserva;

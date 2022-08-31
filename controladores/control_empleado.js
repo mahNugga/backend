@@ -217,6 +217,28 @@ var control_empleado = {
         }catch(error){
             console.log("El end: "+error);
         }
+    },
+
+    sudolistarEmpleados: async function(req,res){
+        try {
+            var listaEmpleado = await Empleado.query().select(
+                'empleado.id',
+                'empleado.nombre',
+                'empleado.apellido',
+                'empleado.correo',
+                'empleado.telefono',
+                'empleado.rol',
+                'empleado.estado'
+            );
+            if(!listaEmpleado) return res.status(404).send({message:"Empleado no existe"});
+            return res.status(200).send({
+                listaEmpleado:listaEmpleado,
+                message: "metodo listar Empleados  is a success!"
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 };

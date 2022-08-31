@@ -31,12 +31,16 @@ ruta.post('/nuevo-servicio',controlador_servicio.nuevoServicio);
 ruta.get('/consulta-servicio',controlador_servicio.listarServicios);
 ruta.post('/nuevo-horario',control_horario.nuevoHorario);
 ruta.get('/consulta-horarioempleado',control_horario.consultaHorario);
+ruta.put('/elimina-horario',control_horario.softBorraHorario);
+ruta.get('/consulta-horarioadmin',control_horario.consultaHorarioAdmin);
+ruta.put('/edita-horarioexterno',control_horario.actualizaHorario);
 ruta.get('/empleado-info',controlador_empleado.credencialesCabEmpleado);
 ruta.get('/cliente-basicinfo',controlador_cliente.infoBasicaCabeceras);
 ruta.get('/verifica-fechas',control_horario.devolverFechas);
 
 ruta.post('/nuevo-cliente',controlador_cliente.nuevoCliente);
 ruta.get('/consulta-cliente',controlador_cliente.listarClientes);
+ruta.get('/mantenimiento-empleado',controlador_empleado.sudolistarEmpleados);
 
 ruta.get('/ingreso',controlador_ingreso.login);
 
@@ -46,4 +50,5 @@ ruta.post('/reservar',la_reserva.nuevaReservacion);
 ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
 ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
 ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
+ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);
 module.exports = ruta;
