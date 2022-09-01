@@ -51,4 +51,5 @@ ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
 ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
 ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);
+ruta.get('/busca-fechareserva',la_reserva.buscaFechacontraFecha);
 module.exports = ruta;
