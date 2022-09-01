@@ -153,5 +153,31 @@ var control_reserva = {
             console.log(error);
         }
     },
+
+    buscaFechacontraFecha: async function(req,res){
+        var params = req.query;
+        var bud = req.body;
+        console.log(params);
+        console.log(bud);
+        try {
+            var ganador = await Reservacion.query().select(
+                'reservacion.fecha',
+                'reservacion.hora',
+                'reservacion.empleado_id',
+                'servicio.hora as duracion'
+            ).innerJoin('servicio','reservacion.servicio_id','servicio.id')
+            .where('reservacion.fecha',params.fechabus)
+            .where('reservacion.empleado_id',params.empid);
+            if(!ganador) return res.status(404).send({
+                message:"en la fecha escogida el empleado no tiene reservaciones o error"
+            });
+            return res.status(200).send({
+                ganador:ganador,
+                message:"thumbsUp"
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 };
 module.exports = control_reserva;
