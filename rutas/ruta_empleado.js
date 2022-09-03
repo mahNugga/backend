@@ -52,4 +52,5 @@ ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
 ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);
 ruta.get('/busca-fechareserva',la_reserva.buscaFechacontraFecha);
+ruta.get('/muestra-estadosreserva',la_reserva.listarEstadosReservas);
 module.exports = ruta;

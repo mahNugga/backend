@@ -1,7 +1,8 @@
 'use strict'
 const {Knex} = require('Knex');
 var Reservacion = require('../models/reservacion');
-var Servicio = require('../models/servicio');
+var EstadoReserva = require('../models/estadoReserva');
+//var Servicio = require('../models/servicio');
 var Cliente = require('../models/cliente');
 
 var control_reserva = {
@@ -174,6 +175,26 @@ var control_reserva = {
             return res.status(200).send({
                 ganador:ganador,
                 message:"thumbsUp"
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    listarEstadosReservas: async function(req,res){
+        
+        try {
+            var listilla = await EstadoReserva.query().select(
+                'estado.nombre',
+                'estado.descripcion',
+                'estado.estado'
+            );
+            if(!listilla) return res.status(404).send({
+                message:"No se econtro nada aqui o error"
+            });
+            return res.status(200).send({
+                listilla:listilla,
+                message:"metodo ListaestadosReservas success!"
             });
         } catch (error) {
             console.log(error);
