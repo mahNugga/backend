@@ -40,6 +40,8 @@ ruta.get('/verifica-fechas',control_horario.devolverFechas);
 
 ruta.post('/nuevo-cliente',controlador_cliente.nuevoCliente);
 ruta.get('/consulta-cliente',controlador_cliente.listarClientes);
+ruta.get('/datos-perfilcliente',controlador_cliente.datosCompletosCliente);
+ruta.put('/actualiza-registrocliente',controlador_cliente.actualizarRegistroCliente);
 ruta.get('/mantenimiento-empleado',controlador_empleado.sudolistarEmpleados);
 
 ruta.get('/ingreso',controlador_ingreso.login);

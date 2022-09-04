@@ -84,7 +84,8 @@ var control_reserva = {
             ,'reservacion.servicio_id','s.id')
             .innerJoin('cliente as c'
             ,'reservacion.cliente_id','c.id')
-            .where('reservacion.empleado_id',params.id);
+            .where('reservacion.empleado_id',params.id)
+            .where('reservacion.fecha',params.fechaing);
             if(!reseTrabajo) return res.status(404).send(
                 {message:"No eciste ese regitro siuuu!"}
             );

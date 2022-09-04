@@ -74,8 +74,54 @@ var control_cliente = {
         }catch(error){
             console.log(error);
         }
-    }
+    },
 
+    datosCompletosCliente: async function(req,res){
+        var params = req.query;
+        try {
+            var datosCli = await Cliente.query().select(
+                'cliente.nombre',
+                'cliente.apellido',
+                'cliente.correo',
+                'cliente.telefono',
+                'cliente.direccion'
+            ).where('cliente.id',params.id);
+            if(!datosCli) return res.status(404).send({
+                message:"No se encontro al cliente"
+            });
+            return res.status(200).send({
+                datosCli:datosCli,
+                message:"Metodo datosCompCliente success!"
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    actualizarRegistroCliente:async function(req,res){
+        var params = req.body;
+        var quin = req.query;
+        console.log(params);
+        console.log(quin);
+        try {
+            var actualito = await Cliente.query().findById(quin.id).patch({
+                nombre:params.nombre,
+                apellido: params.apellido,
+                correo:params.correo,
+                telefono:params.telefono,
+                direccion:params.direccion
+            });
+            if(!actualito) return res.status(404).send({
+                message:"Error al actualizar datos cliente"
+            });
+            return res.status(200).send({
+                actualito:actualito,
+                message:'metodo ActualizaCliente success!'
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 };
 
