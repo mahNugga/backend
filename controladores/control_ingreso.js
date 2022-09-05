@@ -34,7 +34,8 @@ var control_ingreso = {
                     'empleado.correo',
                     'empleado.password'
                 ).where('empleado.correo',datos.correo)
-                .where('empleado.password',datos.password);
+                .where('empleado.password',datos.password)
+                .where('empleado.estado',1);
                 if(empleado_r!=''){
                     return res.status(200).send(
                         {

@@ -29,6 +29,7 @@ ruta.post('/nueva-especialidad',controlador_especialidad.nuevaEspecialidad);
 ruta.get('/consulta-especialidad',controlador_especialidad.listarEspecialidades);
 ruta.post('/nuevo-servicio',controlador_servicio.nuevoServicio);
 ruta.get('/consulta-servicio',controlador_servicio.listarServicios);
+ruta.put('/edita-servicio',controlador_servicio.editaServicio);
 ruta.post('/nuevo-horario',control_horario.nuevoHorario);
 ruta.get('/consulta-horarioempleado',control_horario.consultaHorario);
 ruta.put('/elimina-horario',control_horario.softBorraHorario);
@@ -43,6 +44,7 @@ ruta.get('/consulta-cliente',controlador_cliente.listarClientes);
 ruta.get('/datos-perfilcliente',controlador_cliente.datosCompletosCliente);
 ruta.put('/actualiza-registrocliente',controlador_cliente.actualizarRegistroCliente);
 ruta.get('/mantenimiento-empleado',controlador_empleado.sudolistarEmpleados);
+ruta.put('/mantinimiento-cliente',controlador_cliente.mantenimientoCliente);
 
 ruta.get('/ingreso',controlador_ingreso.login);
 
@@ -55,4 +57,6 @@ ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);
 ruta.get('/busca-fechareserva',la_reserva.buscaFechacontraFecha);
 ruta.get('/muestra-estadosreserva',la_reserva.listarEstadosReservas);
+ruta.put('/mantenimiento-reservaadmin',la_reserva.mantenimientoReservaAdmin);
+
 module.exports = ruta;

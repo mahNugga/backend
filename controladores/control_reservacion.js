@@ -70,6 +70,7 @@ var control_reserva = {
     },
     muestraEmpleadore: async function(req,res){
         var params = req.query;
+        console.log(params);
         try{
             var reseTrabajo = await Reservacion.query().select(
                 'reservacion.fecha',
@@ -85,7 +86,8 @@ var control_reserva = {
             .innerJoin('cliente as c'
             ,'reservacion.cliente_id','c.id')
             .where('reservacion.empleado_id',params.id)
-            .where('reservacion.fecha',params.fechaing);
+            .where('reservacion.fecha',params.feching);
+            console.log(reseTrabajo);
             if(!reseTrabajo) return res.status(404).send(
                 {message:"No eciste ese regitro siuuu!"}
             );
@@ -130,12 +132,13 @@ var control_reserva = {
         var params = req.query;
         try{
             var reseDe = await Reservacion.query().select(
+                'reservacion.id as reserva_id',
                 'reservacion.fecha',
                 'reservacion.hora',
                 'reservacion.cliente_id',
                 'reservacion.estado_id as estado',
                 's.nombre as servicio',
-                's.id',
+                's.id as servid',
                 'c.nombre',
                 'c.apellido',
                 'empleado.apellido as empleado'
@@ -186,6 +189,7 @@ var control_reserva = {
         
         try {
             var listilla = await EstadoReserva.query().select(
+                'estado.id',
                 'estado.nombre',
                 'estado.descripcion',
                 'estado.estado'
@@ -196,6 +200,24 @@ var control_reserva = {
             return res.status(200).send({
                 listilla:listilla,
                 message:"metodo ListaestadosReservas success!"
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    mantenimientoReservaAdmin: async function(req,res){
+        var params = req.body;
+        var quin = req.query;
+        var trolo = req.body.params.updates[0].value; //reserva_id
+        var trolo2 = req.body.params.updates[1].value;
+        console.log(params);
+        console.log(quin);
+        console.log(trolo);
+        console.log(trolo2);
+        try {
+            var cambireser = await Reservacion.query().findById(trolo).patch({
+                estado_id:trolo2
             });
         } catch (error) {
             console.log(error);

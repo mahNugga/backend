@@ -49,6 +49,28 @@ var control_servicio = {
             
         }
 
+    },
+
+    editaServicio: async function(req,res){
+        var params = req.body;
+        console.log(params);
+        try {
+            var ediser = await Servicio.query().findById(params.id).patch({
+                nombre:params.nombre,
+                descripcion:params.descripcion,
+                hora:params.hora,
+                precio:params.precio
+            });
+            if(!ediser) return res.status(404).send({
+                message:"No se encontro serrvicio"
+            });
+            return res.status(200).send({
+                ediser:ediser,
+                message:"metodo EditaServicio success!"
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 

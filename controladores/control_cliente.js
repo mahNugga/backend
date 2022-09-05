@@ -121,6 +121,27 @@ var control_cliente = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    mantenimientoCliente: async function(req,res){
+        var params = req.body;
+        try {
+            var cambiCli = await Cliente.query().findById(params.id).patch({
+                nombre:params.nombre,
+                apellido:params.apellido,
+                telefono:params.telefono,
+                direccion:params.direccion
+            });
+            if(!cambiCli) return res.status(404).send({
+                message:"Error al intentar actualizar Cliente"
+            });
+            return res.status(200).send({
+                cambiCli:cambiCli,
+                message:"metodo MantenimientoCliente success!"
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 };
