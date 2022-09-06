@@ -141,12 +141,15 @@ var control_reserva = {
                 's.id as servid',
                 'c.nombre',
                 'c.apellido',
-                'empleado.apellido as empleado'
+                'empleado.apellido as empleado',
+                'estado.nombre as estador'
             ).innerJoin('servicio as s'
             ,'reservacion.servicio_id','s.id')
             .innerJoin('cliente as c'
             ,'reservacion.cliente_id','c.id')
-            .innerJoin('empleado','reservacion.empleado_id','empleado.id');
+            .innerJoin('empleado','reservacion.empleado_id','empleado.id')
+            .innerJoin('estado'
+            ,'reservacion.estado_id','estado.id');
             if(!reseDe) return res.status(404).send(
                 {message:"No eciste ese regitro siuuu!"}
             );
