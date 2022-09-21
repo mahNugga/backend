@@ -6,7 +6,7 @@ var control_servicio = {
 
     nuevoServicio: async function(req,res){
         var params = req.body;
-
+        console.log(params);
         try {
             var servicio = await Servicio.query().insert({
                 nombre: params.nombre,
