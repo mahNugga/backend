@@ -52,11 +52,13 @@ ruta.post('/imagen',controlador_empleado.subirImagen2);
 
 ruta.post('/reservar',la_reserva.nuevaReservacion);
 ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
+ruta.get('/consulta-reservacioncliente2',la_reserva.muestraClientere2);
 ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
 ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);
 ruta.get('/busca-fechareserva',la_reserva.buscaFechacontraFecha);
 ruta.get('/muestra-estadosreserva',la_reserva.listarEstadosReservas);
 ruta.put('/mantenimiento-reservaadmin',la_reserva.mantenimientoReservaAdmin);
+ruta.delete('/mantenimiento-eliminaempleado',controlador_empleado.alohaEmpleado);
 
 module.exports = ruta;

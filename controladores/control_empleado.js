@@ -239,6 +239,22 @@ var control_empleado = {
             console.log(error);
         }
 
+    },
+
+    alohaEmpleado: async function(req,res){
+        var params = req.query;
+        try{
+            var ysemarcho = await Empleado.query().deleteById(params.id);
+            if(!ysemarcho) return res.status(404).send({
+                message:'no se econtro al empleado a borrar'
+            });
+            return res.status(200).send({
+                ysemarcho:ysemarcho,
+                message:'Metodo Aloha success!'
+            });
+        }catch(err){
+            console.log(err);
+        }
     }
 
 };
