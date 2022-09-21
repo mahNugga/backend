@@ -52,6 +52,7 @@ ruta.post('/imagen',controlador_empleado.subirImagen2);
 
 ruta.post('/reservar',la_reserva.nuevaReservacion);
 ruta.get('/consulta-reservacioncliente',la_reserva.muestraClientere);
+ruta.get('/consulta-reservacioncliente2',la_reserva.muestraClientere2);
 ruta.get('/muestra-siguientetrabajo',la_reserva.muestraOneEmpleadore);
 ruta.get('/muestra-reservaempleado',la_reserva.muestraEmpleadore);
 ruta.get('/muestra-reservaadmin',la_reserva.muestraAdminadore);

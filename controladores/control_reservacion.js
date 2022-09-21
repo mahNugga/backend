@@ -222,9 +222,41 @@ var control_reserva = {
             var cambireser = await Reservacion.query().findById(trolo).patch({
                 estado_id:trolo2
             });
+            if(!cambireser) return res.status(404).send({
+                message:"Error al cambiar estado de reserva"
+            });
+            return res.status(200).send({
+                cambireser:cambireser,
+                message:'metodo cambiar estado reserva success!'
+                
+            });
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+
+    muestraClientere2: async function(req,res){
+        var params = req.query;
+        try{
+            var resecliente = await Reservacion.query().select(
+                'reservacion.fecha',
+                'reservacion.hora',
+                'reservacion.cliente_id',
+                'serv.nombre',
+                'serv.hora as ora'
+            ).innerJoin('servicio as serv'
+            ,'reservacion.servicio_id','serv.id')
+            //.where('reservacion.cliente_id',params.id);
+            if(!resecliente) return res.status(404).send(
+                {message:"No eciste ese regitro siuuu!"}
+            );
+            return res.status(200).send({
+                resecliente:resecliente,
+                message:"thumb up"
+            });
+        }catch(error){
+            console.log(error);
+        }
+    },
 };
 module.exports = control_reserva;

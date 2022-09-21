@@ -72,7 +72,7 @@ var control_horario ={
             }
             return res.status(200).send({
                 fechin:fechin,
-                fechon:fechon,
+                /* fechon:fechon, */
                 message:"ahora se viene lo chido"
             });
         }catch(error){
